@@ -1,0 +1,12 @@
+[
+    {
+        "nombre": "Mario",
+        "apellido": "Cifuentes",
+        "edad": 20,
+        "correo": "mario@gmail.com",
+        "contrasena": 12345,
+        "rol": "ADMINISTRADOR",
+        "estado": "ACTIVO",
+        "id": 1
+    }
+]
