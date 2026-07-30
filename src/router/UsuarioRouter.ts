@@ -24,7 +24,7 @@ function obtenerBody<T>(req: IncomingMessage): Promise<T> {
   });
 }
 
-export async function routes(req: IncomingMessage, res: ServerResponse) {
+export async function routesUsuario(req: IncomingMessage, res: ServerResponse) {
   res.setHeader("Content-Type", "application/json");
 
   const url = req.url ?? "";
@@ -32,7 +32,7 @@ export async function routes(req: IncomingMessage, res: ServerResponse) {
 
   try {
     // GER | LISTAR USUARIOS
-    if (metodo === "GET" && url == "/usuarios") {
+    if (metodo === "GET" && url === "/usuarios") {
       const usuarios = await service.listarUsuarios();
       res.writeHead(200);
       res.end(JSON.stringify({ usuarios }));

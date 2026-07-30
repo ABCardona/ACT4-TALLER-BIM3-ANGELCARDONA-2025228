@@ -1,12 +1,18 @@
 import { createServer } from "http";
-import { routes } from "../router/UsuarioRouter";
+import {routesUsuario } from "../router/UsuarioRouter";
+import { routesProducto } from "../router/ProductoRouter";
+import { routesPedido } from "../router/PedidoRouter";
 
 const servidor = createServer(
     async(req, res) =>{
         const url = req.url ?? "";
 
         if(url.startsWith("/usuarios"))
-        await routes(req, res);
+        await routesUsuario(req, res);
+        if (url.startsWith("/productos")) 
+        await routesProducto(req, res);
+        if (url.startsWith("/pedidos")) 
+        await routesPedido(req, res);
         return;
 
     }

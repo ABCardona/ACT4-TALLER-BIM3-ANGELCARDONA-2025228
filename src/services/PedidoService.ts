@@ -22,10 +22,20 @@ export class PedidoService {
 
     async agregarPedido(pedido: Pedido): Promise<void> {
         const pedidos = await this.repository.obtenerPedidos();
-        const existe = pedidos.some((p) => Number(p.idPedido) === Number(pedido.idPedido));
 
-        if (existe) {
-            throw new Error(`El pedido con ID ${pedido.idPedido} ya existe.`);
+        if (!pedido.idPedido || isNaN(Number(pedido.idPedido))) {
+            const maxId = pedidos.reduce(
+                (max, p) => (Number(p.idPedido) > max ? Number(p.idPedido) : max),
+                0
+            );
+            pedido.idPedido = maxId + 1;
+        } else {
+            const existe = pedidos.some(
+                (p) => Number(p.idPedido) === Number(pedido.idPedido)
+            );
+            if (existe) {
+                throw new Error(`El pedido con ID ${pedido.idPedido} ya existe.`);
+            }
         }
 
         pedidos.push(pedido);
